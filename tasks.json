@@ -1,0 +1,51 @@
+{
+    "tasks": [
+      {
+        "name": "Completar informe mensual",
+        "description": "Elaborar y enviar el informe de actividades del mes.",
+        "status": "pending"
+      },
+      {
+        "name": "Revisar propuesta de proyecto",
+        "description": "Revisar y proporcionar comentarios sobre la propuesta de proyecto para el cliente X.",
+        "status": "pending"
+      },
+      {
+        "name": "Preparar presentación para reunión",
+        "description": "Preparar diapositivas y materiales para la reunión con el equipo.",
+        "status": "completed"
+      },
+      {
+        "name": "Actualizar base de datos de clientes",
+        "description": "Actualizar la base de datos de clientes con la información más reciente.",
+        "status": "completed"
+      },
+      {
+        "name": "Enviar recordatorio de reunión",
+        "description": "Enviar un correo electrónico recordatorio para la reunión semanal del equipo.",
+        "status": "pending"
+      },
+      {
+        "name": "Investigar nuevas tecnologías",
+        "description": "Investigar y recopilar información sobre las últimas tecnologías relevantes para el proyecto actual.",
+        "status": "pending"
+      },
+      {
+        "name": "Realizar pruebas de rendimiento",
+        "description": "Realizar pruebas de rendimiento en la aplicación para identificar posibles cuellos de botella.",
+        "status": "complete"
+      },
+      {
+        "name": "Preparar informe de progreso",
+        "description": "Preparar un informe detallado sobre el progreso del proyecto para presentar al cliente.",
+        "status": "complete"
+      },
+      {
+        "name": "Organizar sesión de capacitación",
+        "description": "Organizar una sesión de capacitación para el personal sobre las nuevas políticas de seguridad.",
+        "status": "pending"
+      }
+    ]
+  }
+  
+  
