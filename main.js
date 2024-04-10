@@ -14,11 +14,11 @@ async function postData(event){
     const task = {
         name,
         description,
-        status: "pendiente"
+        status: "pending"
     }
 
     // async y await
-    const res = await fetch(`${URL}task.json`, {
+    const res = await fetch(`${URL}tasks.json`, {
         method: "POST",
         body: JSON.stringify(task)
     })
@@ -28,6 +28,9 @@ async function postData(event){
         const closeModal = document.getElementById("my_modal_7")
         alert("La tarea sido creada")
         closeModal.click()
+        loadData()
+        window.location.reload()
+        
     }else{
         alert("La tarea no a sido creada")
     }
@@ -35,28 +38,29 @@ async function postData(event){
 
 
 async function loadData(){
-    const res = await fetch(`${URL}task.json`)
+    const res = await fetch(`${URL}tasks.json`)
     const tasks = await res.json()
     const app = document.getElementById("app")
     for(const key in tasks){
         const container = document.createElement("div")
         const task = tasks[key]
+        container.className = "flex w-full"
         container.innerHTML = `
-        <div class="flex gap-3">
+        <div class="flex flex-1 gap-3">
             <p
-                class="flex-1 flex justify-center items-center border-2 border-[#00cdb7] rounded-md text-[#06b6d4] font-bold text-lg text-center px-3 set-box-shadow">
+                class="flex-1 flex justify-center items-center border-2  rounded-md text-[#06b6d4] font-bold text-lg text-center px-3 ${task.status === "pending"? "set-box-shadow-onPending border-rose-500": "set-box-shadow-onCompleted border-[#00cdb7] opacity-25 italic line-through"}">
                 ${task.name}
                 ${task.description}
             </p>
             <div class="grid grid-cols-1 gap-2 w-[4rem]">
-                <button class="btn btn-success h-full">
+                <button onclick="handleStatus('${key}')" class="btn btn-success h-full">
                     <svg class="w-6 h-6 text-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 11.917 9.724 16.5 19 7.5" />
                     </svg>
                 </button>
-                <button class="btn btn-error h-full">
+                <button onclick="handleDelete('${key}')" class="btn btn-error h-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -67,5 +71,43 @@ async function loadData(){
         </div>
         `
         app.appendChild(container)
+    }
+}
+
+async function handleStatus(key){
+    const res = await fetch(`${URL}tasks/${key}.json`)
+    const task = await res.json()
+
+    const updateTask = {
+        ...task,
+        status: task.status === "pending"? "completed": "pending"
+    }
+
+    const reponseUpdate = await fetch(`${URL}tasks/${key}.json`, {
+        method: "PATCH", // PUT PATCH
+        body: JSON.stringify(updateTask)
+    })
+
+    if(reponseUpdate.ok){
+        alert("La tarea a sido actualozado")
+        await loadData()
+        window.location.reload()
+    }else{
+        alert("ERROR la tarea no se a actulizado")
+    }
+    
+}
+
+async function handleDelete(key){
+    const res = await fetch(`${URL}tasks/${key}.json`, {
+        method:"DELETE"
+    })
+
+    if(res.ok){
+        alert("La tarea a sido borrada")
+        await loadData()
+        window.location.reload()
+    }else{
+        console.log("La tarea no a sido borrada");
     }
 }
