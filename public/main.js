@@ -26,13 +26,13 @@ async function postData(event){
     if(res){
         event.target.reset()
         const closeModal = document.getElementById("my_modal_7")
-        alert("La tarea sido creada")
+        alert("Tarea Creada")
         closeModal.click()
         loadData()
         window.location.reload()
         
     }else{
-        alert("La tarea no a sido creada")
+        alert("Tarea no creada")
     }
 }
 
@@ -89,11 +89,11 @@ async function handleStatus(key){
     })
 
     if(reponseUpdate.ok){
-        alert("La tarea a sido actualozado")
+        alert("Tarea Actualizada")
         await loadData()
         window.location.reload()
     }else{
-        alert("ERROR la tarea no se a actulizado")
+        alert("ERROR Tarea no Actualizada")
     }
     
 }
@@ -104,10 +104,10 @@ async function handleDelete(key){
     })
 
     if(res.ok){
-        alert("La tarea a sido borrada")
+        alert("Tarea Eliminada")
         await loadData()
         window.location.reload()
     }else{
-        console.log("La tarea no a sido borrada");
+        console.log("ERROR La Tarea no se elimino");
     }
 }
